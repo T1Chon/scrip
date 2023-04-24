@@ -1,0 +1,13 @@
+git clone https://github.com/T1Chon/esotilin
+# Crear una imagen de Docker
+docker build -t tilin
+# Detener y eliminar el contenedor anterior (si existe)
+docker stop tilin || true && docker rm tilin || true
+# Ejecutar el contenedor de Docker
+docker run -d --name sech -p 80:80 tilin
+# Verificar que el contenedor está ejecutándose
+if [ $(docker ps -f "name=sech" --format "{{.Names}}") == "sech" ]; then
+  echo "La aplicación web se ha desplegado correctamente."
+else
+  echo "Hubo un error al desplegar la aplicación web."
+fi
